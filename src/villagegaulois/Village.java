@@ -128,15 +128,15 @@ public class Village {
 		}
 
 		private Etal[] trouverEtals(String produit) {
-			int nbEtalsValides = 0;
+			int nbEtals = 0;
 			for (int i = 0; i < etals.length; i++) {
 				if (etals[i].contientProduit(produit)) {
-					nbEtalsValides++;
+					nbEtals++;
 				}
 			}
 			
-			Etal[] etalsValides = new Etal[nbEtalsValides];
-			for (int i = 0, j = 0; i < etals.length && j < nbEtalsValides; i++) {
+			Etal[] etalsValides = new Etal[nbEtals];
+			for (int i = 0, j = 0; i < etals.length && j < nbEtals; i++) {
 				if (etals[i].contientProduit(produit)) {
 					etalsValides[j++] = etals[i];
 				}
@@ -164,7 +164,7 @@ public class Village {
 					nbEtalVide++;
 				}
 			}
-			if (nbEtalVide == 0) {
+			if (nbEtalVide != 0) {
 				chaine.append("Il reste " + nbEtalVide + " étals non utilisés dans le marché.\n");
 			}
 			return chaine.toString();
