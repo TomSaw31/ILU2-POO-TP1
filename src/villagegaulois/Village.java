@@ -46,6 +46,9 @@ public class Village {
 
 	public String afficherVillageois() {
 		StringBuilder chaine = new StringBuilder();
+		if (chef == null) {
+			throw new VillageSansChefException("Le village ne contient pas de chef");
+		}
 		if (nbVillageois < 1) {
 			chaine.append("Il n'y a encore aucun habitant au village du chef " + chef.getNom() + ".\n");
 		} else {
@@ -62,7 +65,7 @@ public class Village {
 		chaine.append(vendeur.getNom() + " cherche un endroit pour vendre "+ nbProduit + " " + produit +".\n");
 		int numEtalVide = marche.trouverEtalLibre();
 		marche.utiliserEtal(numEtalVide, vendeur, produit, nbProduit);
-		chaine.append("Le vendeur " + vendeur.getNom() + " vend des " + produit + " à l'étal n°"+(numEtalVide+1)+".\n");
+		chaine.append("Le vendeur " + vendeur.getNom() + " vend des " + produit + " ï¿½ l'ï¿½tal nï¿½"+(numEtalVide+1)+".\n");
 		return chaine.toString();
 	}
 	
@@ -71,9 +74,9 @@ public class Village {
 		StringBuilder chaine = new StringBuilder();
 		Etal[] etalsVendeurs = marche.trouverEtals(produit);
 		if(etalsVendeurs.length == 0) {
-			chaine.append("Il n'y a pas de vendeur qui propose des fleurs au marché\n");
+			chaine.append("Il n'y a pas de vendeur qui propose des fleurs au marchï¿½\n");
 		} else if (etalsVendeurs.length == 1){
-			chaine.append("Seul le vendeur "+ etalsVendeurs[0].getVendeur().getNom() +" propose des fleurs au marché\n");
+			chaine.append("Seul le vendeur "+ etalsVendeurs[0].getVendeur().getNom() +" propose des fleurs au marchï¿½\n");
 		} else {
 			chaine.append("Les vendeurs qui proposent des fleurs sont :\n");
 			for (int i = 0; i < etalsVendeurs.length; i++) {
@@ -98,12 +101,11 @@ public class Village {
 	
 	public String afficherMarche() {
 		StringBuilder chaine = new StringBuilder();
-		chaine.append("Le marché du village " + getNom() +" possède plusieurs étals :\n");
+		chaine.append("Le marchï¿½ du village " + getNom() +" possï¿½de plusieurs ï¿½tals :\n");
 		chaine.append(marche.afficherMarche());
 		return chaine.toString();
 	}
-	
-	
+
 	public static class Marche {
 		private Etal[] etals;
 
@@ -165,7 +167,7 @@ public class Village {
 				}
 			}
 			if (nbEtalVide != 0) {
-				chaine.append("Il reste " + nbEtalVide + " étals non utilisés dans le marché.\n");
+				chaine.append("Il reste " + nbEtalVide + " ï¿½tals non utilisï¿½s dans le marchï¿½.\n");
 			}
 			return chaine.toString();
 		}
